@@ -1,1 +1,228 @@
 
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kilimo App Tanzania</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f3f7f1;
+ color:#203326;
+}
+header{
+ background:#176b38;
+ color:white;
+ padding:25px 18px;
+ border-radius:0 0 22px 22px;
+}
+header h1{margin:0;font-size:27px}
+header p{margin-bottom:0}
+.container{padding:18px}
+.search{
+ width:100%;padding:14px;
+ border:1px solid #ddd;
+ border-radius:12px;
+ font-size:16px;
+ margin:12px 0 20px;
+}
+h2{font-size:20px}
+.grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:13px;
+}
+.card{
+ background:white;
+ padding:19px 12px;
+ border-radius:15px;
+ text-align:center;
+ box-shadow:0 2px 8px #00000010;
+ cursor:pointer;
+}
+.card span{font-size:34px}
+.card h3{font-size:15px;margin-bottom:5px}
+.card p{font-size:12px;color:#68756a}
+.welcome{
+ background:#e0f2df;
+ padding:17px;
+ border-radius:15px;
+ margin-bottom:20px;
+}
+button{
+ background:#176b38;
+ color:white;
+ border:0;
+ padding:12px 18px;
+ border-radius:10px;
+ font-size:15px;
+ cursor:pointer;
+}
+#result{
+ background:white;
+ padding:18px;
+ margin-top:18px;
+ border-radius:15px;
+ display:none;
+ line-height:1.6;
+}
+nav{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ background:white;
+ display:flex;
+ justify-content:space-around;
+ padding:13px 3px;
+ box-shadow:0 -2px 10px #00000012;
+}
+nav a{
+ color:#176b38;
+ text-decoration:none;
+ font-size:12px;
+ text-align:center;
+}
+footer{
+ text-align:center;
+ color:#777;
+ padding:30px 10px 90px;
+ font-size:12px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🌱 KILIMO APP</h1>
+<p>Maarifa ya kilimo, maisha bora.</p>
+<p>Karibu mkulima wa Tanzania!</p>
+</header>
+
+<div class="container">
+
+<div class="welcome">
+<h2>👨‍🌾 Karibu Mkulima!</h2>
+<p>Pata maarifa, ushauri na taarifa mbalimbali za kilimo sehemu moja.</p>
+</div>
+
+<input class="search" id="search"
+placeholder="🔍 Tafuta huduma ya kilimo..."
+oninput="searchCards()">
+
+<h2>Huduma Zetu</h2>
+
+<div class="grid" id="services">
+
+<div class="card" onclick="showInfo('Mazao')">
+<span>🌽</span>
+<h3>Kilimo cha Mazao</h3>
+<p>Mahindi, mpunga, maharage na mengine.</p>
+</div>
+
+<div class="card" onclick="showInfo('Ufugaji')">
+<span>🐄</span>
+<h3>Ufugaji</h3>
+<p>Ng'ombe, mbuzi, kuku na samaki.</p>
+</div>
+
+<div class="card" onclick="showInfo('Hali ya Hewa')">
+<span>🌦️</span>
+<h3>Hali ya Hewa</h3>
+<p>Taarifa za hali ya hewa.</p>
+</div>
+
+<div class="card" onclick="showInfo('Magonjwa')">
+<span>🐛</span>
+<h3>Magonjwa ya Mimea</h3>
+<p>Tambua wadudu na magonjwa.</p>
+</div>
+
+<div class="card" onclick="showInfo('Bei za Mazao')">
+<span>💰</span>
+<h3>Bei za Mazao</h3>
+<p>Fuatilia bei za mazao sokoni.</p>
+</div>
+
+<div class="card" onclick="showInfo('Ushauri')">
+<span>🧑‍🌾</span>
+<h3>Ushauri wa Kilimo</h3>
+<p>Jifunze mbinu bora za kilimo.</p>
+</div>
+
+<div class="card" onclick="showInfo('Soko')">
+<span>🛒</span>
+<h3>Soko la Mazao</h3>
+<p>Nunua na uza mazao yako.</p>
+</div>
+
+<div class="card" onclick="showInfo('Elimu')">
+<span>📚</span>
+<h3>Elimu ya Kilimo</h3>
+<p>Jifunze kilimo cha kisasa.</p>
+</div>
+
+</div>
+
+<div id="result">
+<h2 id="resultTitle"></h2>
+<p id="resultText"></p>
+<button onclick="closeInfo()">Rudi Nyuma</button>
+</div>
+
+</div>
+
+<footer>
+KILIMO APP TANZANIA © 2026
+<br><br>
+Imetengenezwa kwa ajili ya wakulima.
+</footer>
+
+<nav>
+<a href="#" onclick="home()">🏠<br>Nyumbani</a>
+<a href="#" onclick="showInfo('Huduma')">🌱<br>Huduma</a>
+<a href="#" onclick="showInfo('Kuhusu')">ℹ️<br>Kuhusu</a>
+</nav>
+
+<script>
+const descriptions={
+'Mazao':'Hapa utapata elimu ya upandaji, uchaguzi wa mbegu, matumizi sahihi ya mbolea na uvunaji wa mazao mbalimbali.',
+'Ufugaji':'Jifunze kuhusu lishe, makazi, uzalishaji na utunzaji bora wa mifugo.',
+'Hali ya Hewa':'Hapa tutaweka taarifa za hali ya hewa na ushauri wa kupanga shughuli za kilimo. Taarifa za moja kwa moja bado hazijaunganishwa.',
+'Magonjwa':'Jifunze kutambua magonjwa ya mimea na wadudu waharibifu pamoja na njia za kuzuia.',
+'Bei za Mazao':'Hapa tutaweka taarifa za bei za mazao katika masoko mbalimbali Tanzania.',
+'Ushauri':'Pata mbinu za kilimo bora kutoka kwa wataalamu.',
+'Soko':'Hapa wakulima wataweza kutangaza na kuuza mazao yao.',
+'Elimu':'Pata mafunzo kuhusu kilimo cha kisasa na teknolojia za kilimo.',
+'Huduma':'Chagua huduma unayotaka kutoka kwenye orodha ya Kilimo App.',
+'Kuhusu':'Kilimo App ni programu inayolenga kuwasaidia wakulima wa Tanzania kupata elimu na taarifa za kilimo kwa Kiswahili.'
+};
+
+function showInfo(name){
+ document.getElementById('result').style.display='block';
+ document.getElementById('resultTitle').innerText=name;
+ document.getElementById('resultText').innerText=
+ descriptions[name] || 'Karibu kwenye Kilimo App.';
+ document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+function closeInfo(){
+ document.getElementById('result').style.display='none';
+}
+function home(){
+ closeInfo();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function searchCards(){
+ let q=document.getElementById('search').value.toLowerCase();
+ document.querySelectorAll('.card').forEach(card=>{
+ card.style.display=card.innerText.toLowerCase().includes(q)?'block':'none';
+ });
+}
+</script>
+
+</body>
+</html>
+
